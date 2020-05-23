@@ -1,0 +1,18 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-23 10:35:26
+ * @LastEditTime: 2020-05-23 10:39:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \sayhello\sayhello\templates\macros.html
+--> 
+{% macro form_field(field) %}
+    {{ field.label }}<br>
+    {{ field(**kwargs) }}<br>
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <small class="error">{{ error }}</small><br>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+

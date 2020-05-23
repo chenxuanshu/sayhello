@@ -1,0 +1,59 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-23 09:36:52
+ * @LastEditTime: 2020-05-23 15:25:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \sayhello\sayhello\templates\base.html
+--> 
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            {% block title %}
+            sayhello!
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-3.3.7/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}">
+        {{ bootstrap.load_css() }}
+        {% block css %}
+        {% endblock %}
+    </head>
+    <body>
+        <main class="container">
+            <header>
+                <h1 class="text-center display-4">
+                    <a href="{{ url_for('index') }}" class="text-success">
+                        <strong>SayHello</strong>
+                    </a>
+                    <small style="font-size: 24px;" class="text-muted">to the world</small>
+                </h1>
+            </header>
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% block content %}
+            {% endblock %}
+            <footer class="text-center">
+                {% block footer %}
+                <p><a id="bottom" href="#" title="Go Top">&uarr;</a></p>
+                {% endblock %}
+            </footer>
+        </main>
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-3.3.7/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script type="text/javascript" src="https://unpkg.com/@popperjs/core@2"></script>
+        {{ bootstrap.load_js() }}
+        {{ moment.include_moment() }}
+        {{ moment.locale('zh-cn') }}
+    </body>
+
+</html>

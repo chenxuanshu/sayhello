@@ -1,0 +1,39 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-23 09:36:36
+ * @LastEditTime: 2020-05-23 15:22:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \sayhello\sayhello\templates\index.html
+--> 
+{% extends 'base.html' %}
+{% from 'macros.html' import form_field %}
+{% from 'bootstrap/form.html' import render_form %}
+
+
+{% block content %}
+<div class="hello-form">
+    {{ render_form(form,action=request.full_path) }}
+</div>
+<h5>{{ messages|length }} messages
+    <small class="float-right">
+        <a href="#bottom" title='Go Bottom'>&darr;</a>
+    </small>
+</h5>
+<div class="list-group">
+    {% for message in messages %}
+    <a class="list-group-item list-group-item-action flex-column">
+        <div class="d-flex">
+            <h5 class="mb-1 text-success">{{ message.name }}
+                <small class="text-muted"> #{{ loop.revindex }}</small>
+            </h5>
+            <small data-toggle="tooltip" data-placement="top"
+            data-delay="500" data-timestamp="{{ message.timestamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}">
+                {{ moment(message.timestamp).fromNow(refresh=True) }}
+            </small>
+        </div>
+        <p class="mb-1">{{ message.body }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
